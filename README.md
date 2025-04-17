@@ -1,6 +1,6 @@
-# YouTube検索・要約アプリケーション
+# Pure Js SPA Flask Postgres Simple App
 
-Firebase認証を使用し、YouTubeビデオを検索して、Vertex AI Geminiによる要約を生成するWebアプリケーション。
+Firebase認証を使用したピュアJSのシンプルなFlaskウェブアプリケーション
 
 ## 目次
 
@@ -26,8 +26,6 @@ Firebase認証を使用し、YouTubeビデオを検索して、Vertex AI Gemini�
 ## 主な機能
 
 - **ユーザー認証**: Firebase Authenticationを使用したユーザー登録・ログイン機能
-- **YouTube検索**: キーワードに基づいてYouTubeビデオを検索
-- **ビデオ要約**: Vertex AI Geminiを使用してビデオ内容の要約を生成
 - **認証トークン検証**: バックエンドでのFirebase IDトークン検証
 - **レスポンシブUI**: モバイルデバイスにも対応したユーザーインターフェース
 - **プロフィール管理**: ユーザープロフィール情報の管理機能
@@ -48,34 +46,10 @@ Firebase認証を使用し、YouTubeビデオを検索して、Vertex AI Gemini�
 - **Flask**: Webフレームワーク
 - **Blueprint**: モジュール化されたルーティング
 - **Firebase Admin SDK**: IDトークン検証
-- **YouTube Data API**: ビデオ検索と情報取得
-- **Vertex AI Gemini**: AI要約生成
 
 ### クラウドサービス
 
 - **Firebase Authentication**: ユーザー認証
-- **Google Cloud Platform**: 
-  - **YouTube Data API**: ビデオ検索
-  - **Vertex AI**: Geminiモデルによる要約生成
-
-## システムアーキテクチャ
-
-```
-+-------------------+      +-------------------+      +-------------------+
-|                   |      |                   |      |                   |
-|  クライアント      +----->+  Flaskバックエンド  +----->+  外部サービス     |
-|  (Vanilla JS SPA) |      |  (Python/Flask)   |      |  (GCP/Firebase)  |
-|                   |      |                   |      |                   |
-+-------------------+      +-------------------+      +-------------------+
-        |                           |                          |
-        v                           v                          v
-+-------------------+      +-------------------+      +-------------------+
-|                   |      |                   |      |                   |
-| Firebase認証      |      | YouTube検索API    |      | Vertex AI Gemini  |
-| (ユーザー管理)     |      | (ビデオ検索)      |      | (要約生成)        |
-|                   |      |                   |      |                   |
-+-------------------+      +-------------------+      +-------------------+
-```
 
 ## セットアップ手順
 
@@ -87,15 +61,6 @@ Firebase認証を使用し、YouTubeビデオを検索して、Vertex AI Gemini�
 - Google Cloudアカウント
 - Firebaseプロジェクト
 
-### APIキーの取得
-
-#### YouTube Data API
-
-1. [Google Cloud Console](https://console.cloud.google.com/)にアクセス
-2. プロジェクトを作成または選択
-3. YouTube Data API v3を有効化
-4. 認証情報ページでAPIキーを作成
-5. 必要に応じてAPIキーの制限を設定
 
 #### Firebase設定
 
@@ -106,12 +71,6 @@ Firebase認証を使用し、YouTubeビデオを検索して、Vertex AI Gemini�
 5. 提供されるFirebase設定オブジェクトをコピー
 6. プロジェクト設定 > サービスアカウントから新しい秘密鍵を生成
 
-#### Vertex AI設定
-
-1. [Google Cloud Console](https://console.cloud.google.com/)で同じプロジェクトを選択
-2. Vertex AI APIを有効化
-3. サービスアカウントを作成し、適切な権限を付与
-4. サービスアカウントキーをJSON形式でダウンロード
 
 ### バックエンドのセットアップ
 
@@ -147,19 +106,8 @@ Firebase認証を使用し、YouTubeビデオを検索して、Vertex AI Gemini�
 
 6. `.env`ファイルを編集し、必要な環境変数を設定:
    ```
-   # YouTube API認証情報
-   YOUTUBE_API_KEY=あなたのyoutube_api_keyをここに
-
    # CORS設定
    CORS_ORIGIN=http://localhost:3000
-
-   # Google Cloud設定
-   GOOGLE_CLOUD_PROJECT=あなたのgoogle_cloudプロジェクトID
-   GOOGLE_CLOUD_LOCATION=us-central1
-   GEMINI_MODEL_ID=gemini-1.5-pro
-
-   # Google Cloud認証情報ファイルを指すように環境変数を設定
-   GOOGLE_APPLICATION_CREDENTIALS=/path/to/your/credentials.json
 
    # Firebase設定
    FIREBASE_PROJECT_ID=あなたのfirebaseプロジェクトID
